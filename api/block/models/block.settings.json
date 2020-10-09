@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "blocks",
+  "info": {
+    "name": "Block",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "Description": {
+      "type": "string",
+      "required": true
+    },
+    "Content": {
+      "type": "richtext",
+      "required": true
+    },
+    "Area": {
+      "type": "enumeration",
+      "enum": [
+        "introduction",
+        "current_interest",
+        "services",
+        "posts",
+        "contact",
+        "resume"
+      ],
+      "required": true
+    }
+  }
+}

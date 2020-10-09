@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "employments",
+  "info": {
+    "name": "Employments"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "JobTitle": {
+      "type": "string"
+    },
+    "Employer": {
+      "type": "string"
+    },
+    "JobDescription": {
+      "type": "richtext"
+    },
+    "StartDate": {
+      "type": "date"
+    },
+    "EndDate": {
+      "type": "date"
+    }
+  }
+}
