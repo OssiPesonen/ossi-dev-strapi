@@ -24,11 +24,19 @@ export const editorConfig = {
       'mediaEmbed',
       'undo',
       'redo',
-      '|',
-      'todoList'
     ]
   },
-  language: 'en',
+  link: {
+    decorators: {
+      isExternal: {
+        mode: 'manual',
+        label: 'Open in a new tab',
+        attributes: {
+          target: '_blank'
+        }
+      }
+    }
+  },
   image: {
     toolbar: [
       'imageTextAlternative',
@@ -45,4 +53,4 @@ export const editorConfig = {
       'tableProperties'
     ]
   },
-};
+}

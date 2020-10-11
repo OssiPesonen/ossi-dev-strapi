@@ -1,8 +1,8 @@
 {
   "kind": "collectionType",
-  "collectionName": "links",
+  "collectionName": "articles",
   "info": {
-    "name": "Links",
+    "name": "Articles",
     "description": ""
   },
   "options": {
@@ -11,14 +11,13 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "Title": {
+    "title": {
       "type": "string"
     },
-    "Link": {
-      "type": "string",
-      "required": true
+    "description": {
+      "type": "richtext"
     },
-    "Icon": {
+    "link": {
       "type": "string"
     }
   }

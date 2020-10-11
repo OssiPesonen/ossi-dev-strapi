@@ -6,10 +6,14 @@ import useCKEditor from './hooks/useCkEditor'
 import { editorConfig } from './editorConfig'
 
 const Wrapper = styled.div`
+    border: 1px solid #eee;
+
     .ck-content {
         font-family: "Fira Sans", sans-serif, arial, verdana;
         font-size: 16px;
         line-height: 1.8;
+        max-height: 420px;
+        overflow: auto;
 
         &.ck-focused {
             box-shadow: none !important;
@@ -20,31 +24,31 @@ const Wrapper = styled.div`
             padding-bottom: 1.5rem;
         }
 
-        h2, h3, h4 {
+        h1, h2, h3, h4 {
             font-family: "Poppins", sans-serif, arial, verdana;
-            font-weight: 500;
+            font-weight: 600;
+            margin-top: 0.5rem;
             margin-bottom: 1.5rem;
             line-height: 1.3;
        }
 
        h2 {
-         font-size: 2.2rem;
+         font-size: 2.6rem;
        }
 
        h3 {
-         font-size: 1.8rem;
+         font-size: 2rem;
        }
 
        h4 {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
        }
     }
 `
 
 const Editor = ({ onChange, name, value }) => {
-  const { CKEditor, BalloonEditor, isEditorLoaded } = useCKEditor()
+  const { CKEditor, ClassicEditor, isEditorLoaded } = useCKEditor()
   const [editorState, setEditorState] = useState('')
-  const [isEntryLoaded, setEntryloaded] = useState(false)
 
   /**
    * Set editor content once entry is ready
@@ -52,16 +56,15 @@ const Editor = ({ onChange, name, value }) => {
   useEffect(() => {
     if (value) {
       setEditorState(value)
-      setEntryloaded(true)
     }
   }, [value])
 
   return (
     <Wrapper className="ck-editor">
-      {isEditorLoaded && isEntryLoaded ? (
+      {isEditorLoaded ? (
         <CKEditor
           config={editorConfig}
-          editor={BalloonEditor}
+          editor={ClassicEditor}
           data={editorState}
           onChange={(event, editor) => {
             const data = editor.getData()
