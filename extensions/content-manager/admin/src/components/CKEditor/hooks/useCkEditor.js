@@ -8,7 +8,7 @@ export default function useCKEditor () {
   useEffect(() => {
     editorRef.current = {
       CKEditor: require('@ckeditor/ckeditor5-react'),
-      ClassicEditor: require('./../custom-build/build/ckeditor')
+      ClassicEditor: require('../custom-build/build/ckeditor.js')
     }
     setIsEditorLoaded(true)
   }, [])
