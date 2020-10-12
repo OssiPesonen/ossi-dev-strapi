@@ -1,69 +1,122 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
-import { Button } from '@buffetjs/core'
-import { isEmpty } from 'lodash'
-import { Label, InputDescription, InputErrors } from 'strapi-helper-plugin'
-import Editor from '../CKEditor'
-import MediaLib from '../MediaLib'
+/**
+ *
+ * WysiwygWithErrors
+ *
+ */
 
-const WysiwygWithErrors = ({
-  inputDescription,
-  errors,
-  label,
-  name,
-  noErrorsDescription,
-  onChange,
-  value,
-}) => {
-  const [isOpen, setIsOpen] = useState(false)
+import React from 'react';
+import PropTypes from 'prop-types';
+import { isEmpty, isFunction } from 'lodash';
+import cn from 'classnames';
 
-  const handleChange = data => {
-    if (data.mime.includes('image')) {
-      const imgTag = `<p><img src="${data.url}" caption="${data.caption}" alt="${data.alternativeText}"></img></p>`
-      const newValue = value ? `${value}${imgTag}` : imgTag
-      onChange({ target: { name, value: newValue } })
-    }
+import { Description, ErrorMessage, Label } from '@buffetjs/styles';
+import { Error } from '@buffetjs/core';
+
+import Wysiwyg from '../Wysiwyg';
+import Wrapper from './Wrapper';
+
+// eslint-disable-next-line react/prefer-stateless-function
+class WysiwygWithErrors extends React.Component {
+  render() {
+    const {
+      autoFocus,
+      className,
+      deactivateErrorHighlight,
+      disabled,
+      error: inputError,
+      inputClassName,
+      inputDescription,
+      inputStyle,
+      label,
+      name,
+      onBlur: handleBlur,
+      onChange,
+      placeholder,
+      resetProps,
+      style,
+      tabIndex,
+      validations,
+      value,
+      ...rest
+    } = this.props;
+
+    return (
+      <Error inputError={inputError} name={name} type="text" validations={validations}>
+        {({ canCheck, onBlur, error, dispatch }) => {
+          const hasError = Boolean(error);
+
+          return (
+            <Wrapper
+              className={`${cn(!isEmpty(className) && className)} ${hasError ? 'bordered' : ''}`}
+              style={style}
+            >
+              <Label htmlFor={name}>{label}</Label>
+              <Wysiwyg
+                {...rest}
+                autoFocus={autoFocus}
+                className={inputClassName}
+                disabled={disabled}
+                deactivateErrorHighlight={deactivateErrorHighlight}
+                error={hasError}
+                name={name}
+                onBlur={isFunction(handleBlur) ? handleBlur : onBlur}
+                onChange={e => {
+                  if (!canCheck) {
+                    dispatch({
+                      type: 'SET_CHECK',
+                    });
+                  }
+
+                  dispatch({
+                    type: 'SET_ERROR',
+                    error: null,
+                  });
+                  onChange(e);
+                }}
+                placeholder={placeholder}
+                resetProps={resetProps}
+                style={inputStyle}
+                tabIndex={tabIndex}
+                value={value}
+              />
+              {!hasError && inputDescription && <Description>{inputDescription}</Description>}
+              {hasError && <ErrorMessage>{error}</ErrorMessage>}
+            </Wrapper>
+          );
+        }}
+      </Error>
+    );
   }
-
-  const handleToggle = () => setIsOpen(prev => !prev)
-
-  let spacer = !isEmpty(inputDescription) ? (<div style={{ height: '.4rem' }}/>) : <></>
-
-  if (!noErrorsDescription && !isEmpty(errors)) {
-    spacer = <div/>
-  }
-
-  return (
-    <div style={{ marginBottom: '1.6rem' }}>
-      <Label htmlFor={name} message={label} style={{ marginBottom: 10 }}/>
-      <div style={{ marginBottom: '1rem' }}>
-        <Button color="secondary" onClick={handleToggle}>
-          Insert Media
-        </Button>
-      </div>
-      <Editor name={name} onChange={onChange} value={value}/>
-      <InputDescription
-        message={inputDescription}
-        style={!isEmpty(inputDescription) ? { marginTop: '1.4rem' } : {}}
-      />
-      <InputErrors
-        errors={(!noErrorsDescription && errors) || []}
-        name={name}
-      />
-      {spacer}
-      <MediaLib onToggle={handleToggle} isOpen={isOpen} onChange={handleChange}/>
-    </div>
-  )
 }
 
 WysiwygWithErrors.defaultProps = {
-  errors: [],
+  autoFocus: false,
+  className: '',
+  deactivateErrorHighlight: false,
+  didCheckErrors: false,
+  disabled: false,
+  error: null,
+  inputClassName: '',
+  inputDescription: '',
+  inputStyle: {},
   label: '',
-  noErrorsDescription: false,
-}
+  onBlur: false,
+  placeholder: '',
+  resetProps: false,
+  style: {},
+  tabIndex: '0',
+  validations: {},
+  value: null,
+};
 
 WysiwygWithErrors.propTypes = {
-  errors: PropTypes.array,
+  autoFocus: PropTypes.bool,
+  className: PropTypes.string,
+  deactivateErrorHighlight: PropTypes.bool,
+  didCheckErrors: PropTypes.bool,
+  disabled: PropTypes.bool,
+  error: PropTypes.string,
+  inputClassName: PropTypes.string,
   inputDescription: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.func,
@@ -72,6 +125,7 @@ WysiwygWithErrors.propTypes = {
       params: PropTypes.object,
     }),
   ]),
+  inputStyle: PropTypes.object,
   label: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.func,
@@ -81,9 +135,14 @@ WysiwygWithErrors.propTypes = {
     }),
   ]),
   name: PropTypes.string.isRequired,
-  noErrorsDescription: PropTypes.bool,
+  onBlur: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   onChange: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
-}
+  placeholder: PropTypes.string,
+  resetProps: PropTypes.bool,
+  style: PropTypes.object,
+  tabIndex: PropTypes.string,
+  validations: PropTypes.object,
+  value: PropTypes.string,
+};
 
-export default WysiwygWithErrors
+export default WysiwygWithErrors;

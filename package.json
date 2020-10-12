@@ -11,7 +11,9 @@
   },
   "devDependencies": {},
   "dependencies": {
-    "@ckeditor/ckeditor5-react": "2.0.0",
+    "@ckeditor/ckeditor5-core": "^23.0.0",
+    "@ckeditor/ckeditor5-react": "2.1.0",
+    "@ckeditor/ckeditor5-ui": "^23.0.0",
     "knex": "<0.20.0",
     "mysql": "latest",
     "node-fetch": "^2.6.1",
