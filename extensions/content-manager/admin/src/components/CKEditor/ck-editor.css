@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:wght@500;700&display=swap');
+
+.ck-content {
+    font-family: Fira Sans, sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Droid Sans, Helvetica Neue;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #333;
+    max-height: 560px;
+}
+
+.ck-content p {
+    padding-bottom: 1.5rem;
+}
+
+.ck-content h1,
+.ck-content h2,
+.ck-content h3,
+.ck-content h4 {
+    font-family: "Poppins", sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Droid Sans", "Helvetica Neue";
+    font-weight: 500;
+    color: #000;
+    line-height: 1.2;
+}
+
+.ck-content .image {
+    text-align: inherit !important;
+    margin: 1rem 0 !important;
+}
+
+.ck-content h3, .ck-content h4 {
+    font-weight: 500;
+}
+
+.ck-content h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.ck-content ul,
+.ck-content ol {
+    padding-left: 0;
+    margin-left: 0;
+    margin-bottom: 1.5rem;
+    list-style: square inside;
+}
+
+.ck-content li {
+    padding-left: 0;
+}
+
+@media screen and (min-width: 992px) {
+    .ck-content h1 {
+        font-size: 2.8rem;
+        margin-bottom: 1.7rem !important;
+    }
+}
+
+.ck-content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+@media screen and (min-width: 992px) {
+    .ck-content h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem !important;
+    }
+}
+
+.ck-content h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.8rem;
+}
+
+@media screen and (min-width: 992px) {
+    .ck-content h3 {
+        font-size: 1.6rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+.ck-content h4 {
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+}
+
+@media screen and (min-width: 992px) {
+    .ck-content h4 {
+        font-size: 1.25rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+.ck-content b,
+.ck-content strong {
+    font-weight: bold;
+    color: #000;
+}
+
+.ck-content i, .ck-content em {
+    font-style: italic;
+}
+
+.ck-content img {
+    max-width: 100%;
+    height: auto;
+}
+
+.ck-content iframe {
+    max-width: 100%;
+}
+
+.ck-content blockquote {
+    display: block;
+    padding-left: 1.5rem;
+    margin-bottom: 2rem !important;
+    border-left: 4px solid #FFC661;
+    color: #999;
+    font-style: italic;
+}
+
+.ck-content pre {
+    margin-bottom: 1.5rem;
+}
